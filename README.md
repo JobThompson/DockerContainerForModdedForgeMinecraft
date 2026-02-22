@@ -139,6 +139,7 @@ modpack/
 | `FABRIC_LOADER_VERSION`| Fabric only   | —       | Fabric loader version (e.g. `0.15.7`)                |
 | `JAVA_MEMORY`          | No            | `4G`    | Heap size for `-Xms` and `-Xmx` (e.g. `6G`, `8G`)   |
 | `EULA`                 | ✅ Yes        | —       | Must be `true` to accept the Minecraft EULA          |
+| `WORLD_NAME`           | No            | `world` | World folder name to back up (or `level-name` value) |
 | `BACKUP_RETAIN_DAYS`   | No            | `7`     | Days to keep automated backups                       |
 
 ---
@@ -170,6 +171,7 @@ Run `backup.sh` manually or schedule it via cron to back up your world:
 docker exec mc-server /scripts/backup.sh
 ```
 
+`backup.sh` backs up `/data/<WORLD_NAME>` (default: `world`). If `WORLD_NAME` is not set, it also auto-detects `level-name` from `/data/server.properties` when available.  
 Backups are stored in `/backups` (mapped to `./backups` on the host) as timestamped `.tar.gz` archives.  
 Archives older than `BACKUP_RETAIN_DAYS` (default: 7) are automatically removed.
 
